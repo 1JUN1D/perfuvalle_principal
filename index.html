@@ -970,196 +970,183 @@
         }
     });
 
-    /* =========================================================================
-       2. VIDEO CAROUSEL CON AUDIO
-       ========================================================================= */
-    const videoSlides = document.querySelectorAll('.video-slide');
-    const videoDots   = document.querySelectorAll('.video-dot');
-    const prevBtn     = document.querySelector('.video-prev');
-    const nextBtn     = document.querySelector('.video-next');
-    const audioToggle = document.querySelector('.audio-toggle');
-    let currentSlide  = 0;
-    let slideInterval;
-    let isAudioMuted  = true;
+/* =========================================================================
+   2. VIDEO CAROUSEL CON AUDIO - AVANCE POR FINALIZACIÓN DE VIDEO
+   ========================================================================= */
+const videoSlides = document.querySelectorAll('.video-slide');
+const videoDots   = document.querySelectorAll('.video-dot');
+const prevBtn     = document.querySelector('.video-prev');
+const nextBtn     = document.querySelector('.video-next');
+const audioToggle = document.querySelector('.audio-toggle');
+let currentSlide  = 0;
+let isAudioMuted  = true;
 
-    function showSlide(index) {
-        // Hide all slides
-        videoSlides.forEach(slide => slide.classList.remove('active'));
-        videoDots.forEach(dot   => dot.classList.remove('active'));
+function showSlide(index) {
+    // Hide all slides
+    videoSlides.forEach(slide => slide.classList.remove('active'));
+    videoDots.forEach(dot   => dot.classList.remove('active'));
 
-        // Show current slide
-        videoSlides[index].classList.add('active');
-        videoDots[index].classList.add('active');
+    // Show current slide
+    videoSlides[index].classList.add('active');
+    videoDots[index].classList.add('active');
 
-        // Play current video
-        const currentVideo = videoSlides[index].querySelector('video');
-        if (currentVideo) {
-            currentVideo.currentTime = 0;
-            currentVideo.muted = isAudioMuted;
-            currentVideo.play().catch(e => console.log('Video autoplay failed:', e));
-        }
-
-        // Pause other videos
-        videoSlides.forEach((slide, i) => {
-            if (i !== index) {
-                const video = slide.querySelector('video');
-                if (video) video.pause();
-            }
-        });
+    // Play current video
+    const currentVideo = videoSlides[index].querySelector('video');
+    if (currentVideo) {
+        currentVideo.currentTime = 0;
+        currentVideo.muted = isAudioMuted;
+        currentVideo.play().catch(e => console.log('Video autoplay failed:', e));
     }
 
-    function toggleAudio() {
-        isAudioMuted = !isAudioMuted;
-        const currentVideo = videoSlides[currentSlide].querySelector('video');
-        
-        if (currentVideo) {
-            currentVideo.muted = isAudioMuted;
-        }
-
-        // Update button appearance
-        const icon = audioToggle.querySelector('i');
-        if (isAudioMuted) {
-            audioToggle.classList.remove('unmuted');
-            audioToggle.classList.add('muted');
-            audioToggle.title = 'Activar Audio';
-            icon.className = 'fas fa-volume-mute';
-        } else {
-            audioToggle.classList.remove('muted');
-            audioToggle.classList.add('unmuted');
-            audioToggle.title = 'Desactivar Audio';
-            icon.className = 'fas fa-volume-up';
-        }
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % videoSlides.length;
-        showSlide(currentSlide);
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + videoSlides.length) % videoSlides.length;
-        showSlide(currentSlide);
-    }
-
-    function startAutoplay() {
-        slideInterval = setInterval(nextSlide, 10000); // Change slide every 10 seconds
-    }
-
-    function stopAutoplay() {
-        clearInterval(slideInterval);
-    }
-
-    // Initialize video carousel
-    if (videoSlides.length > 0) {
-        showSlide(0);
-        startAutoplay();
-
-        // Audio toggle button
-        if (audioToggle) {
-            audioToggle.addEventListener('click', toggleAudio);
-        }
-
-        // Navigation buttons
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                stopAutoplay();
-                nextSlide();
-                startAutoplay();
-            });
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                stopAutoplay();
-                prevSlide();
-                startAutoplay();
-            });
-        }
-
-        // Dot navigation
-        videoDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                stopAutoplay();
-                currentSlide = index;
-                showSlide(currentSlide);
-                startAutoplay();
-            });
-        });
-
-        // Video ended event
-        videoSlides.forEach((slide, index) => {
+    // Pause other videos
+    videoSlides.forEach((slide, i) => {
+        if (i !== index) {
             const video = slide.querySelector('video');
-            if (video) {
-                video.addEventListener('ended', () => {
-                    if (index === currentSlide) nextSlide();
-                });
+            if (video) video.pause();
+        }
+    });
+}
 
-                // Ensure video audio state is consistent
-                video.addEventListener('loadeddata', () => {
-                    video.muted = isAudioMuted;
-                });
-            }
+function toggleAudio() {
+    isAudioMuted = !isAudioMuted;
+    const currentVideo = videoSlides[currentSlide].querySelector('video');
+    
+    if (currentVideo) {
+        currentVideo.muted = isAudioMuted;
+    }
+
+    // Update button appearance
+    const icon = audioToggle.querySelector('i');
+    if (isAudioMuted) {
+        audioToggle.classList.remove('unmuted');
+        audioToggle.classList.add('muted');
+        audioToggle.title = 'Activar Audio';
+        icon.className = 'fas fa-volume-mute';
+    } else {
+        audioToggle.classList.remove('muted');
+        audioToggle.classList.add('unmuted');
+        audioToggle.title = 'Desactivar Audio';
+        icon.className = 'fas fa-volume-up';
+    }
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % videoSlides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + videoSlides.length) % videoSlides.length;
+    showSlide(currentSlide);
+}
+
+// Initialize video carousel
+if (videoSlides.length > 0) {
+    showSlide(0);
+
+    // Audio toggle button
+    if (audioToggle) {
+        audioToggle.addEventListener('click', toggleAudio);
+    }
+
+    // Navigation buttons
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+    }
+
+    // Dot navigation
+    videoDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
         });
+    });
 
-        // Pause autoplay when user hovers over video area
-        const videoCarouselSection = document.querySelector('.video-carousel-section');
-        if (videoCarouselSection) {
-            videoCarouselSection.addEventListener('mouseenter', stopAutoplay);
-            videoCarouselSection.addEventListener('mouseleave', startAutoplay);
-        }
-
-        // SOPORTE TOUCH (SWIPE) EN CAROUSEL
-        let touchStartX = 0;
-        let touchEndX   = 0;
-
-        if (videoCarouselSection) {
-            videoCarouselSection.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-
-            videoCarouselSection.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-        }
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-
-            if (Math.abs(diff) > swipeThreshold) {
-                stopAutoplay();
-                if (diff > 0) {
-                    // Swipe left
-                    nextSlide();
-                } else {
-                    // Swipe right
-                    prevSlide();
+    // Video ended event - AVANCE AUTOMÁTICO CUANDO TERMINA EL VIDEO
+    videoSlides.forEach((slide, index) => {
+        const video = slide.querySelector('video');
+        if (video) {
+            video.addEventListener('ended', () => {
+                // Solo avanzar si es el video actual que está siendo mostrado
+                if (index === currentSlide) {
+                    // Si es el último video, opcional: reiniciar desde el primero
+                    // o detener el carrusel
+                    if (currentSlide === videoSlides.length - 1) {
+                        // Reiniciar desde el primero (opcional)
+                        currentSlide = 0;
+                        showSlide(currentSlide);
+                        
+                        // Si prefieres que se detenga en el último, comenta las líneas anteriores
+                        // y descomenta la siguiente:
+                        // console.log('Carrusel completado');
+                    } else {
+                        nextSlide();
+                    }
                 }
-                startAutoplay();
-            }
-        }
+            });
 
-        // MANEJO DE ERRORES DE VIDEO
-        videoSlides.forEach(slide => {
-            const video = slide.querySelector('video');
-            if (video) {
-                video.addEventListener('error', (e) => {
-                    console.log('Video error:', e);
-                    // Ocultar controles si falla la carga
-                    const controls = document.querySelector('.video-controls');
-                    const prevButton = document.querySelector('.video-prev');
-                    const nextButton = document.querySelector('.video-next');
-                    const audioButton = document.querySelector('.audio-toggle');
-                    
-                    if (controls) controls.style.display = 'none';
-                    if (prevButton) prevButton.style.display = 'none';
-                    if (nextButton) nextButton.style.display = 'none';
-                    if (audioButton) audioButton.style.display = 'none';
-                });
-            }
+            // Ensure video audio state is consistent
+            video.addEventListener('loadeddata', () => {
+                video.muted = isAudioMuted;
+            });
+        }
+    });
+
+    // SOPORTE TOUCH (SWIPE) EN CAROUSEL
+    let touchStartX = 0;
+    let touchEndX   = 0;
+
+    const videoCarouselSection = document.querySelector('.video-carousel-section');
+    if (videoCarouselSection) {
+        videoCarouselSection.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        videoCarouselSection.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
         });
     }
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left
+                nextSlide();
+            } else {
+                // Swipe right
+                prevSlide();
+            }
+        }
+    }
+
+    // MANEJO DE ERRORES DE VIDEO
+    videoSlides.forEach(slide => {
+        const video = slide.querySelector('video');
+        if (video) {
+            video.addEventListener('error', (e) => {
+                console.log('Video error:', e);
+                // Ocultar controles si falla la carga
+                const controls = document.querySelector('.video-controls');
+                const prevButton = document.querySelector('.video-prev');
+                const nextButton = document.querySelector('.video-next');
+                const audioButton = document.querySelector('.audio-toggle');
+                
+                if (controls) controls.style.display = 'none';
+                if (prevButton) prevButton.style.display = 'none';
+                if (nextButton) nextButton.style.display = 'none';
+                if (audioButton) audioButton.style.display = 'none';
+            });
+        }
+    });
+}
 
     /* =========================================================================
        3. BLOG "LOAD MORE" BUTTON
