@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfuvalle S.A.S - Perfumería Fina, Lociones y Fragancias Premium | Cali, Colombia</title>
+    <meta name="description" content="Perfuvalle S.A.S - Más de 170 referencias en perfumería fina, lociones refrescantes y fragancias premium. Duración de 8-24 horas. Cali, Valle del Cauca.">
+    <meta name="keywords" content="perfumes, fragancias, lociones, perfumería fina, Perfuvalle, Cali, Colombia, aromas, ambientadores">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Perfuvalle S.A.S - Perfumería Fina y Fragancias Premium">
+    <meta property="og:description" content="Más de 170 referencias en perfumería fina con duración de 8-24 horas. Precios asequibles y preparación personalizada.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <style>
+        /* Video Carousel Styles - Formato vertical 9:16 */
+        .video-carousel-section {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 4rem auto;
+            aspect-ratio: 9/16;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        .video-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .video-slide.active {
+            opacity: 1;
+        }
+
+        .video-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.1) 30%,
+                rgba(0, 0, 0, 0.1) 70%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .video-content {
+            text-align: center;
+            color: white;
+            z-index: 3;
+            margin-top: auto;
+            margin-bottom: 2rem;
+        }
+
+        .video-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .video-content p {
+            font-size: 1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            line-height: 1.4;
+        }
+
+        .video-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 4;
+        }
+
+        .video-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .video-prev {
+            left: 15px;
+        }
+
+        .video-next {
+            right: 15px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 4;
+        }
+
+        .video-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .video-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Botón de Audio */
+        .audio-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .audio-toggle:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        .audio-toggle.muted {
+            color: #ff6b6b;
+        }
+
+        .audio-toggle.unmuted {
+            color: #4caf50;
+        }
+
+        /* Responsive Video Carousel - Formato vertical */
+        @media (max-width: 768px) {
+            .video-carousel-section {
+                max-width: 90%;
+                margin: 2rem auto;
+                border-radius: 20px;
+            }
+
+            .video-overlay {
+                padding: 1.5rem;
+            }
+
+            .video-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .video-content p {
+                font-size: 0.9rem;
+            }
+
+            .video-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+
+            .video-prev {
+                left: 10px;
+            }
+
+            .video-next {
+                right: 10px;
+            }
+
+            .video-controls {
+                bottom: 60px;
+            }
+
+            .video-dot {
+                width: 6px;
+                height: 6px;
+            }
+
+            .audio-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-carousel-section {
+                max-width: 95%;
+                margin: 1.5rem auto;
+                border-radius: 15px;
+            }
+
+            .video-overlay {
+                padding: 1rem;
+            }
+
+            .video-content {
+                margin-bottom: 1rem;
+            }
+
+            .video-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .video-content p {
+                font-size: 0.8rem;
+            }
+
+            .video-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+
+            .video-controls {
+                bottom: 40px;
+            }
+
+            .audio-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-loading">
+        <div class="header-container container">
+            <div class="logo">
+                <img src="../imagenes/logo-perfuvalle.png" alt="Perfuvalle Logo">
+            </div>
+            
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Inicio
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/#blog" class="nav-link">
+                            <i class="fas fa-blog"></i>
+                            Blog
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a href="https://lociones.perfuvalle.com/masculinas.html" class="dropdown-item">
+                                <i class="fas fa-male"></i>
+                                Hombres
+                            </a>
+                            <a href="https://lociones.perfuvalle.com/femeninas.html" class="dropdown-item">
+                                <i class="fas fa-female"></i>
+                                Mujeres
+                            </a>
+                            <a href="https://lociones.perfuvalle.com/arabess.html" class="dropdown-item">
+                                <i class="fas fa-mosque"></i>
+                                Árabes
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#" class="nav-link has-dropdown active">
+                            <i class="fas fa-wine-bottle"></i>
+                            Frascos/Envases
+                        </a>
+                        <div class="dropdown">
+                            <a href="https://frascos.perfuvalle.com/" class="dropdown-item">
+                                <i class="fas fa-info-circle"></i>
+                                Información
+                            </a>
+                            <a href="https://frascos.perfuvalle.com/productos.html" class="dropdown-item">
+                                <i class="fas fa-th-large"></i>
+                                Catálogo
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="https://wa.me/573015999848?text=Hola,%20estoy%20interesado%20en%20sus%20frascos%20para%20perfumes." class="contact-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Perfuvalle S.A.S</h1>
+            <p class="hero-subtitle">Tu aliado estratégico en el mundo de la perfumería. Especialistas en fragancias premium, frascos y envases de alta calidad. Atendemos tanto a empresarios como a consumidores finales con más de 170 referencias y soluciones personalizadas para cada necesidad.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">170+</span>
+                    <span class="stat-text">Referencias Disponibles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">B2B + B2C</span>
+                    <span class="stat-text">Ventas Mayoristas y Retail</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8-24h</span>
+                    <span class="stat-text">Duración del Aroma</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-text">Calidad Garantizada</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn btn-primary">
+                    <i class="fas fa-eye"></i>
+                    Explorar Catálogo
+                </a>
+                <a href="https://wa.me/573015999848?text=Hola,%20me%20gustaría%20conocer%20más%20sobre%20sus%20fragancias%20y%20frascos%20para%20mi%20negocio." class="btn btn-outline" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Consultar Ahora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p class="section-subtitle">Descubre nuestra amplia gama de productos y servicios especializados en perfumería para mayoristas y consumidores finales</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h3 class="service-title">Perfumería Fina</h3>
+                    <p class="service-description">Más de 170 referencias en perfumería fina con duración de 16 a 24 horas en nuestra línea premium. Fragancias de alta calidad para todos los gustos y presupuestos.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="service-title">Lociones Refrescantes</h3>
+                    <p class="service-description">Lociones splash refrescantes con duración de 8 a 16 horas. Perfectas para el cuidado personal diario y la sensación de frescura.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <h3 class="service-title">Frascos y Envases</h3>
+                    <p class="service-description">Amplio catálogo de frascos y envases para perfumes y colonias. Variedad de diseños, tamaños y estilos para empresarios y emprendedores del sector.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="service-title">Ventas B2B y B2C</h3>
+                    <p class="service-description">Atendemos tanto a mayoristas y distribuidores como a consumidores finales. Precios especiales por volumen y atención personalizada.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3 class="service-title">Línea Infantil</h3>
+                    <p class="service-description">Fragancias suaves y delicadas especialmente diseñadas para niños. Fórmulas hipoalergénicas y seguras para la piel sensible.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="service-title">Aromas para el Hogar</h3>
+                    <p class="service-description">Ambientadores en spray y aceites aromáticos para crear el ambiente perfecto en tu hogar. Variedad de fragancias únicas.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="service-title">Empaques Premium</h3>
+                    <p class="service-description">Gran variedad de empaques atractivos en diferentes modelos y tamaños. Presentaciones elegantes para regalar o vender.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="service-title">Preparación Personalizada</h3>
+                    <p class="service-description">Modo de preparación a gusto del cliente. Adaptamos nuestros productos a tus preferencias y necesidades específicas, tanto para uso personal como comercial.</p>
+                </div>
+            </div>
+
+            <!-- Video Carousel Section - Formato 9:16 con Audio -->
+            <div class="video-carousel-section">
+                <div class="video-carousel">
+                    <div class="video-slide active">
+                        <video muted loop>
+                            <source src="video1.mp4" type="video/mp4">
+                            <!-- Video placeholder - reemplazar con videos reales -->
+                        </video>
+                    </div>
+                    <div class="video-slide">
+                        <video muted loop>
+                            <source src="video2.mp4" type="video/mp4">
+                            <!-- Video placeholder - reemplazar con videos reales -->
+                        </video>
+                    </div>
+                    <div class="video-slide">
+                        <video muted loop>
+                            <source src="video3.mp4" type="video/mp4">
+                            <!-- Video placeholder - reemplazar con videos reales -->
+                        </video>
+                    </div>
+                </div>
+                
+                <div class="video-overlay">
+                    <div class="video-content">
+                        <h2>Experiencia Perfuvalle</h2>
+                        <p>Descubre la calidad y variedad que nos convierte en líderes del sector de perfumería en Cali</p>
+                    </div>
+                </div>
+                
+                <button class="audio-toggle muted" title="Activar/Desactivar Audio">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                
+                <button class="video-nav video-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="video-nav video-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="video-controls">
+                    <span class="video-dot active" data-slide="0"></span>
+                    <span class="video-dot" data-slide="1"></span>
+                    <span class="video-dot" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2>Sobre Perfuvalle S.A.S</h2>
+                    <p class="about-text">En Perfuvalle S.A.S entendemos que el perfume es mucho más que una fragancia: es una expresión personal, una herramienta de negocio y un elemento fundamental en el cuidado personal. Por eso nos hemos especializado en ofrecer soluciones integrales tanto para empresarios del sector como para consumidores finales.</p>
+                    
+                    <p class="about-text">Con sede en Cali, Valle del Cauca, hemos construido una reputación sólida basada en la calidad, variedad y precios competitivos. Nuestro modelo de negocio B2B + B2C nos permite atender desde grandes distribuidores hasta el cliente que busca su fragancia perfecta.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Duración Garantizada 8-24h</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-handshake"></i>
+                            <span>Ventas B2B y B2C</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-palette"></i>
+                            <span>Más de 170 Referencias</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Frascos y Envases</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-user-cog"></i>
+                            <span>Preparación Personalizada</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Precios Competitivos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <!-- Placeholder para imagen de la empresa -->
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'><rect fill='%23f8f9fa' width='600' height='400'/><g fill='%231e8b4d' opacity='0.1'><circle cx='150' cy='120' r='80'/><circle cx='450' cy='280' r='60'/><circle cx='300' cy='200' r='100'/></g><rect fill='%23333' x='250' y='150' width='100' height='100' rx='50'/><text x='300' y='320' font-family='Arial' font-size='24' fill='%23666' text-anchor='middle'>PERFUVALLE S.A.S</text><text x='300' y='350' font-family='Arial' font-size='16' fill='%23999' text-anchor='middle'>Cali, Valle del Cauca</text></svg>" alt="Perfuvalle S.A.S - Nuestra Empresa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Blog y Noticias</h2>
+                <p class="section-subtitle">Mantente al día con las últimas tendencias en perfumería y consejos de expertos</p>
+            </div>
+            
+            <div class="blog-grid" id="blog-grid">
+                <!-- Blog posts iniciales -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e8f5e9' width='400' height='250'/><g fill='%231e8b4d' opacity='0.3'><circle cx='100' cy='80' r='40'/><circle cx='300' cy='170' r='50'/><rect x='150' y='100' width='100' height='50' rx='25'/></g><text x='200' y='130' font-family='Arial' font-size='18' fill='%23333' text-anchor='middle'>PERFUMES</text></svg>" alt="Tendencias en Perfumería 2025">
+                        <span class="blog-date">15 Ene 2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Las Tendencias en Perfumería para 2025</h3>
+                        <p class="blog-excerpt">Descubre las fragancias que marcarán tendencia este año. Desde notas florales hasta aromas orientales, te contamos todo sobre las nuevas preferencias en perfumería.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Equipo Perfuvalle</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                <!--
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23f0f8ff' width='400' height='250'/><g fill='%234CAF50' opacity='0.4'><polygon points='200,50 250,100 200,150 150,100'/><circle cx='120' cy='180' r='30'/><circle cx='280' cy='180' r='30'/></g><text x='200' y='210' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>CUIDADO PERSONAL</text></svg>" alt="Cuidado de la Piel">
+                        <span class="blog-date">10 Ene 2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Cómo Elegir el Perfume Perfecto para tu Tipo de Piel</h3>
+                        <p class="blog-excerpt">Tu tipo de piel influye en cómo se desarrolla una fragancia. Aprende a elegir el perfume ideal según tus características únicas para lograr la proyección perfecta.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>María González</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23fff8dc' width='400' height='250'/><g fill='%238BC34A' opacity='0.5'><rect x='100' y='80' width='60' height='90' rx='30'/><rect x='240' y='80' width='60' height='90' rx='30'/><circle cx='200' cy='200' r='25'/></g><text x='200' y='230' font-family='Arial' font-size='14' fill='%23555' text-anchor='middle'>CONSEJOS</text></svg>" alt="Conservación de Perfumes">
+                        <span class="blog-date">5 Ene 2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">5 Consejos para Conservar tus Perfumes por Más Tiempo</h3>
+                        <p class="blog-excerpt">Maximiza la vida útil de tus fragancias favoritas con estos consejos profesionales. Desde el almacenamiento hasta la aplicación correcta.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Carlos Rodríguez</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                -->
+                <!-- Blog posts ocultos -->
+                <article class="blog-card hidden">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23ffe4e1' width='400' height='250'/><g fill='%23ff6b6b' opacity='0.4'><heart cx='150' cy='120' r='30'/><heart cx='250' cy='120' r='30'/></g><text x='200' y='200' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>AMOR</text></svg>" alt="Perfumes para San Valentín">
+                        <span class="blog-date">1 Ene 2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Los Mejores Perfumes para Regalar en San Valentín</h3>
+                        <p class="blog-excerpt">Una guía completa para elegir la fragancia perfecta como regalo romántico. Desde clásicos atemporales hasta novedades irresistibles.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Ana Martínez</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card hidden">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e6f3ff' width='400' height='250'/><g fill='%2300bcd4' opacity='0.6'><circle cx='120' cy='100' r='25'/><circle cx='200' cy='150' r='30'/><circle cx='280' cy='100' r='25'/></g><text x='200' y='210' font-family='Arial' font-size='18' fill='%23333' text-anchor='middle'>HISTORIA</text></svg>" alt="Historia del Perfume">
+                        <span class="blog-date">28 Dic 2024</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">La Fascinante Historia del Perfume a Través de los Siglos</h3>
+                        <p class="blog-excerpt">Un viaje por la historia de la perfumería, desde las civilizaciones antiguas hasta las innovaciones modernas que han revolucionado el mundo de las fragancias.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Dr. Luis Perfetti</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card hidden">
+                    <div class="blog-image">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23f3e5f5' width='400' height='250'/><g fill='%239c27b0' opacity='0.5'><rect x='150' y='80' width='40' height='80' rx='20'/><rect x='210' y='80' width='40' height='80' rx='20'/><circle cx='200' cy='180' r='15'/></g><text x='200' y='220' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>EMPRENDIMIENTO</text></svg>" alt="Negocio de Perfumes">
+                        <span class="blog-date">20 Dic 2024</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Cómo Iniciar tu Propio Negocio de Perfumes</h3>
+                        <p class="blog-excerpt">Guía completa para emprendedores que desean incursionar en el mundo de la perfumería. Desde la inversión inicial hasta las estrategias de marketing.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Empresarios Perfuvalle</span>
+                            </div>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="blog-actions">
+                <button class="btn btn-primary" id="load-more-btn">
+                    <i class="fas fa-plus"></i>
+                    Ver Más Entradas
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Visítanos en Cali</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <strong>Sede Principal</strong>
+                                Carrera 26 M # 96-59 Marroquín<br>
+                                Cali, Valle del Cauca, Colombia
+                                <strong>Sede Secundaria</strong>
+                                Carrera  26  M1  # 73B - 18 Marroquín<br>
+                                Cali, Valle del Cauca, Colombia
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-text">
+                                <strong>Linea Principal</strong>
+                                +57 301 599 9848
+                                <strong>Linea Secundaria</strong>
+                                +57 318 889 4005
+                                <strong>Linea Secundaria</strong>
+                                +57 301 195 3875
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contact-text">
+                                <strong>Horarios</strong>
+                                Lun - Sáb: 8:00AM - 6:00PM<br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Perfuvalle1/" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/perfuvalle/" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/573015999848" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="whatsapp-cta">
+                    <h2>¿Listo para encontrar tu fragancia perfecta?</h2>
+                    <p>Contáctanos por WhatsApp y descubre nuestro catálogo completo de más de 170 referencias en perfumería fina, frascos y envases.</p>
+                    <a href="https://wa.me/573015999848?text=Hola,%20me%20gustaría%20conocer%20más%20sobre%20sus%20fragancias,%20perfumes%20y%20frascos." class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Contactar por WhatsApp
+                    </a>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">Respuesta inmediata en horario de atención</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Perfuvalle S.A.S</h3>
+                    <p>Especialistas en perfumería fina, lociones refrescantes, fragancias premium y frascos para perfumes. Más de 170 referencias con calidad garantizada y precios competitivos para mayoristas y consumidores finales.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://lociones.perfuvalle.com/">Lociones</a></li>
+                        <li><a href="https://frascos.perfuvalle.com/">Frascos y Envases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Empresa</h3>
+                    <ul class="footer-links">
+                        <li><a href="#nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="https://lociones.perfuvalle.com/">Catálogo Online</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            Carrera 26 M # 96-59 Marroquín, Cali
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            +57 301 599 9848
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            perfuvallecali@hotmail.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Perfuvalle S.A.S - Todos los derechos reservados. Perfumería Fina, Fragancias Premium y Frascos para Perfumes.
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/573015999848?text=Hola,%20estoy%20interesado%20en%20sus%20fragancias,%20perfumes%20y%20frascos." class="whatsapp-float-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+    /* =========================================================================
+       1. MOBILE NAVIGATION & DROPDOWNS
+       ========================================================================= */
+    // Mobile Navigation Toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav   = document.querySelector('.main-nav');
+
+    navToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+
+        // Cambiar icono del botón
+        const icon = navToggle.querySelector('i');
+        if (mainNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Mobile Dropdown Toggle
+    const navLinksWithDropdown = document.querySelectorAll('.nav-link.has-dropdown');
+
+    navLinksWithDropdown.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Solo en móvil
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const navItem  = link.closest('.nav-item');
+                const isActive = navItem.classList.contains('mobile-active');
+
+                // Cerrar todos los otros dropdowns móviles
+                document.querySelectorAll('.nav-item.mobile-active').forEach(item => {
+                    if (item !== navItem) item.classList.remove('mobile-active');
+                });
+
+                // Toggle el dropdown actual
+                navItem.classList.toggle('mobile-active');
+            }
+        });
+    });
+
+    // Cerrar menú móvil al hacer clic en un enlace
+    const allNavLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+    allNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Si no es un dropdown parent en móvil, cerrar el menú
+            if (!link.classList.contains('has-dropdown') || window.innerWidth > 768) {
+                mainNav.classList.remove('active');
+
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+
+                // También cerrar dropdowns móviles
+                document.querySelectorAll('.nav-item.mobile-active').forEach(item => {
+                    item.classList.remove('mobile-active');
+                });
+            }
+        });
+    });
+
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-item')) {
+            document.querySelectorAll('.nav-item.mobile-active').forEach(item => {
+                item.classList.remove('mobile-active');
+            });
+        }
+    });
+
+    // Header scroll effect (mostrar / ocultar header al hacer scroll)
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
+        }
+
+        lastScrollTop = scrollTop;
+    });
+
+    // Resize handler para limpiar estados móviles
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            mainNav.classList.remove('active');
+            document.querySelectorAll('.nav-item.mobile-active').forEach(item => {
+                item.classList.remove('mobile-active');
+            });
+
+            const icon = navToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Actualizar estado activo del menú según la URL
+    function updateActiveNavigation() {
+        const currentPath = window.location.pathname;
+        const navLinks    = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+
+            // Lógica de activación
+            const href = link.getAttribute('href');
+            if (
+                href === currentPath ||
+                (currentPath.includes('/fragancias/') && link.textContent.includes('Fragancias')) ||
+                (currentPath.includes('/frascos/')     && link.textContent.includes('Frascos'))    ||
+                (currentPath.includes('/blog')         && link.textContent.includes('Blog'))
+            ) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateActiveNavigation);
+
+    // Efecto de hover mejorado para los dropdowns en desktop
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        const dropdown = item.querySelector('.dropdown');
+        if (dropdown) {
+            let hoverTimer;
+
+            item.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimer);
+                if (window.innerWidth > 768) dropdown.style.display = 'block';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    hoverTimer = setTimeout(() => {
+                        dropdown.style.display = '';
+                    }, 100);
+                }
+            });
+        }
+    });
+
+    /* =========================================================================
+       2. VIDEO CAROUSEL CON AUDIO
+       ========================================================================= */
+    const videoSlides = document.querySelectorAll('.video-slide');
+    const videoDots   = document.querySelectorAll('.video-dot');
+    const prevBtn     = document.querySelector('.video-prev');
+    const nextBtn     = document.querySelector('.video-next');
+    const audioToggle = document.querySelector('.audio-toggle');
+    let currentSlide  = 0;
+    let slideInterval;
+    let isAudioMuted  = true;
+
+    function showSlide(index) {
+        // Hide all slides
+        videoSlides.forEach(slide => slide.classList.remove('active'));
+        videoDots.forEach(dot   => dot.classList.remove('active'));
+
+        // Show current slide
+        videoSlides[index].classList.add('active');
+        videoDots[index].classList.add('active');
+
+        // Play current video
+        const currentVideo = videoSlides[index].querySelector('video');
+        if (currentVideo) {
+            currentVideo.currentTime = 0;
+            currentVideo.muted = isAudioMuted;
+            currentVideo.play().catch(e => console.log('Video autoplay failed:', e));
+        }
+
+        // Pause other videos
+        videoSlides.forEach((slide, i) => {
+            if (i !== index) {
+                const video = slide.querySelector('video');
+                if (video) video.pause();
+            }
+        });
+    }
+
+    function toggleAudio() {
+        isAudioMuted = !isAudioMuted;
+        const currentVideo = videoSlides[currentSlide].querySelector('video');
+        
+        if (currentVideo) {
+            currentVideo.muted = isAudioMuted;
+        }
+
+        // Update button appearance
+        const icon = audioToggle.querySelector('i');
+        if (isAudioMuted) {
+            audioToggle.classList.remove('unmuted');
+            audioToggle.classList.add('muted');
+            audioToggle.title = 'Activar Audio';
+            icon.className = 'fas fa-volume-mute';
+        } else {
+            audioToggle.classList.remove('muted');
+            audioToggle.classList.add('unmuted');
+            audioToggle.title = 'Desactivar Audio';
+            icon.className = 'fas fa-volume-up';
+        }
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % videoSlides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + videoSlides.length) % videoSlides.length;
+        showSlide(currentSlide);
+    }
+
+    function startAutoplay() {
+        slideInterval = setInterval(nextSlide, 10000); // Change slide every 10 seconds
+    }
+
+    function stopAutoplay() {
+        clearInterval(slideInterval);
+    }
+
+    // Initialize video carousel
+    if (videoSlides.length > 0) {
+        showSlide(0);
+        startAutoplay();
+
+        // Audio toggle button
+        if (audioToggle) {
+            audioToggle.addEventListener('click', toggleAudio);
+        }
+
+        // Navigation buttons
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopAutoplay();
+                nextSlide();
+                startAutoplay();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopAutoplay();
+                prevSlide();
+                startAutoplay();
+            });
+        }
+
+        // Dot navigation
+        videoDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopAutoplay();
+                currentSlide = index;
+                showSlide(currentSlide);
+                startAutoplay();
+            });
+        });
+
+        // Video ended event
+        videoSlides.forEach((slide, index) => {
+            const video = slide.querySelector('video');
+            if (video) {
+                video.addEventListener('ended', () => {
+                    if (index === currentSlide) nextSlide();
+                });
+
+                // Ensure video audio state is consistent
+                video.addEventListener('loadeddata', () => {
+                    video.muted = isAudioMuted;
+                });
+            }
+        });
+
+        // Pause autoplay when user hovers over video area
+        const videoCarouselSection = document.querySelector('.video-carousel-section');
+        if (videoCarouselSection) {
+            videoCarouselSection.addEventListener('mouseenter', stopAutoplay);
+            videoCarouselSection.addEventListener('mouseleave', startAutoplay);
+        }
+
+        // SOPORTE TOUCH (SWIPE) EN CAROUSEL
+        let touchStartX = 0;
+        let touchEndX   = 0;
+
+        if (videoCarouselSection) {
+            videoCarouselSection.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            videoCarouselSection.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                stopAutoplay();
+                if (diff > 0) {
+                    // Swipe left
+                    nextSlide();
+                } else {
+                    // Swipe right
+                    prevSlide();
+                }
+                startAutoplay();
+            }
+        }
+
+        // MANEJO DE ERRORES DE VIDEO
+        videoSlides.forEach(slide => {
+            const video = slide.querySelector('video');
+            if (video) {
+                video.addEventListener('error', (e) => {
+                    console.log('Video error:', e);
+                    // Ocultar controles si falla la carga
+                    const controls = document.querySelector('.video-controls');
+                    const prevButton = document.querySelector('.video-prev');
+                    const nextButton = document.querySelector('.video-next');
+                    const audioButton = document.querySelector('.audio-toggle');
+                    
+                    if (controls) controls.style.display = 'none';
+                    if (prevButton) prevButton.style.display = 'none';
+                    if (nextButton) nextButton.style.display = 'none';
+                    if (audioButton) audioButton.style.display = 'none';
+                });
+            }
+        });
+    }
+
+    /* =========================================================================
+       3. BLOG "LOAD MORE" BUTTON
+       ========================================================================= */
+    const loadMoreBtn  = document.getElementById('load-more-btn');
+    const hiddenPosts  = document.querySelectorAll('.blog-card.hidden');
+    let   postsShown   = 0;
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            const postsToShow = 3;          // Mostrar 3 posts cada vez
+            const endIndex    = postsShown + postsToShow;
+
+            for (let i = postsShown; i < endIndex && i < hiddenPosts.length; i++) {
+                hiddenPosts[i].classList.remove('hidden');
+
+                // Animación
+                hiddenPosts[i].style.opacity   = '0';
+                hiddenPosts[i].style.transform = 'translateY(30px)';
+
+                setTimeout(() => {
+                    hiddenPosts[i].style.transition = 'all 0.5s ease';
+                    hiddenPosts[i].style.opacity    = '1';
+                    hiddenPosts[i].style.transform  = 'translateY(0)';
+                }, 100 * (i - postsShown));
+            }
+
+            postsShown = endIndex;
+
+            // Ocultar botón si ya no quedan posts ocultos
+            if (postsShown >= hiddenPosts.length) loadMoreBtn.style.display = 'none';
+        });
+    }
+
+    /* =========================================================================
+       4. NAVEGACIÓN SUAVE ENTRE SECCIONES
+       ========================================================================= */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerHeight    = document.querySelector('header').offsetHeight;
+                const targetPosition  = target.offsetTop - headerHeight;
+
+                window.scrollTo({
+                    top      : targetPosition,
+                    behavior : 'smooth'
+                });
+
+                // Cerrar menú móvil si está abierto
+                mainNav.classList.remove('active');
+            }
+        });
+    });
+
+    /* =========================================================================
+       5. ANIMACIONES CON INTERSECTION OBSERVER
+       ========================================================================= */
+    const observerOptions = {
+        threshold  : 0.1,
+        rootMargin : '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity   = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Elementos a animar
+    const animateElements = document.querySelectorAll('.service-card, .blog-card, .about-content');
+    animateElements.forEach(el => {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+
+    /* =========================================================================
+       6. CONTADORES ANIMADOS EN HERO
+       ========================================================================= */
+    function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number');
+
+        counters.forEach(counter => {
+            const target       = counter.textContent;
+            const numericValue = parseInt(target.replace(/[^0-9]/g, ''));
+
+            if (numericValue && numericValue > 0) {
+                let current     = 0;
+                const increment = numericValue / 50;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= numericValue) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        const displayValue = Math.floor(current);
+                        if (target.includes('+')) {
+                            counter.textContent = displayValue + '+';
+                        } else if (target.includes('h')) {
+                            counter.textContent = displayValue + '-24h';
+                        } else if (target.includes('%')) {
+                            counter.textContent = displayValue + '%';
+                        } else {
+                            counter.textContent = displayValue;
+                        }
+                    }
+                }, 50);
+            }
+        });
+    }
+
+    // Iniciar contadores cuando la sección hero sea visible
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) {
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        heroObserver.observe(heroStats);
+    }
+
+    /* =========================================================================
+       7. EFECTO HOVER TARJETAS DE SERVICIO
+       ========================================================================= */
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-15px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    /* =========================================================================
+       8. MANEJO DE CLIC EN TARJETAS DE BLOG
+       ========================================================================= */
+    const blogCards = document.querySelectorAll('.blog-card');
+    blogCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('read-more')) {
+                // Podrías redirigir a la entrada completa
+                console.log('Blog post clicked:', card.querySelector('.blog-title').textContent);
+            }
+        });
+    });
+
+    /* =========================================================================
+       9. BOTONES DE WHATSAPP
+       ========================================================================= */
+    function openWhatsApp(message = '') {
+        const phone          = '573015999848';
+        const defaultMessage = 'Hola, estoy interesado en sus fragancias, perfumes y frascos.';
+        const finalMessage   = message || defaultMessage;
+        const url            = `https://wa.me/${phone}?text=${encodeURIComponent(finalMessage)}`;
+        window.open(url, '_blank');
+    }
+
+    document.querySelectorAll('.whatsapp-btn, .whatsapp-float-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Mensaje específico según contexto
+            let message = 'Hola, estoy interesado en sus fragancias, perfumes y frascos.';
+
+            if (btn.closest('.hero')) {
+                message = 'Hola, me gustaría conocer más sobre su catálogo de más de 170 referencias en perfumería y frascos.';
+            } else if (btn.closest('.contact')) {
+                message = 'Hola, me gustaría obtener más información sobre sus productos, precios y disponibilidad tanto para uso personal como para mi negocio.';
+            }
+
+            openWhatsApp(message);
+        });
+    });
+
+    /* =========================================================================
+       10. LAZY-LOAD DE IMÁGENES
+       ========================================================================= */
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+
+    /* =========================================================================
+       11. REDUCIR ANIMACIONES EN DISPOSITIVOS LOW-END
+       ========================================================================= */
+    const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2;
+    if (isLowEndDevice) document.body.classList.add('reduced-motion');
+
+    /* =========================================================================
+       12. INICIALIZACIÓN GENERAL
+       ========================================================================= */
+    window.addEventListener('load', () => {
+        document.body.style.opacity = '1';
+
+        // Reiniciar carrusel de video tras carga
+        if (videoSlides.length > 0) {
+            setTimeout(() => showSlide(0), 500);
+        }
+    });
+
+    /* =========================================================================
+       13. OPTIMIZACIÓN DE SCROLL (REQUESTANIMATIONFRAME)
+       ========================================================================= */
+    let ticking = false;
+
+    function updateScrollEffects() {
+        // Cambiar opacidad de fondo del header según el scroll
+        const scrollPercent = Math.min(window.scrollY / 100, 1);
+        header.style.background = `linear-gradient(135deg,
+            rgba(30, 139, 77, ${0.9 + scrollPercent * 0.1}) 0%,
+            rgba(76, 175, 80, ${0.8 + scrollPercent * 0.2}) 50%,
+            rgba(139, 195, 74, ${0.7 + scrollPercent * 0.3}) 100%)`;
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
+    });
+
+    /* =========================================================================
+       14. ACCESIBILIDAD: NAVEGACIÓN CON TECLADO
+       ========================================================================= */
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch (e.key) {
+            case 'ArrowLeft':
+                if (document.querySelector('.video-carousel-section:hover')) {
+                    e.preventDefault();
+                    stopAutoplay();
+                    prevSlide();
+                    startAutoplay();
+                }
+                break;
+            case 'ArrowRight':
+                if (document.querySelector('.video-carousel-section:hover')) {
+                    e.preventDefault();
+                    stopAutoplay();
+                    nextSlide();
+                    startAutoplay();
+                }
+                break;
+            case ' ': // Spacebar para toggle audio
+                if (document.querySelector('.video-carousel-section:hover')) {
+                    e.preventDefault();
+                    toggleAudio();
+                }
+                break;
+            case 'Escape':
+                mainNav.classList.remove('active');
+                break;
+        }
+    });
+
+    /* =========================================================================
+       15. ACCESIBILIDAD: FOCUS TRAP EN MENÚ MÓVIL
+       ========================================================================= */
+    const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    function trapFocus(element) {
+        const focusable     = element.querySelectorAll(focusableElements);
+        const firstFocusable = focusable[0];
+        const lastFocusable  = focusable[focusable.length - 1];
+
+        element.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusable) {
+                        lastFocusable.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusable) {
+                        firstFocusable.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        });
+    }
+
+    // Aplicar focus-trap cuando el menú se abra
+    const mobileNavObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.target.classList.contains('active')) {
+                trapFocus(mainNav);
+            }
+        });
+    });
+
+    mobileNavObserver.observe(mainNav, { attributes: true, attributeFilter: ['class'] });
+
+    /* =========================================================================
+       16. LOG EN CONSOLA
+       ========================================================================= */
+    console.log('Perfuvalle S.A.S website loaded successfully! 🌟');
+</script>
+
+</body>
+</html>
