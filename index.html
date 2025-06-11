@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRB502CZSD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GRB502CZSD');
+</script>
     <style>
         /* Video Carousel Styles - Formato vertical 9:16 */
         .video-carousel-section {
@@ -571,7 +580,7 @@
         </div>
     </section>
 
-    <section class="blog" id="blog">
+<section class="blog" id="blog">
         <div class="container">
             <div class="section-title">
                 <h2>Blog y Noticias</h2>
@@ -579,112 +588,58 @@
             </div>
             
             <div class="blog-grid" id="blog-grid">
-                <!-- Blog posts iniciales -->
+                <!-- Blog post visible -->
                 <article class="blog-card">
                     <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e8f5e9' width='400' height='250'/><g fill='%231e8b4d' opacity='0.3'><circle cx='100' cy='80' r='40'/><circle cx='300' cy='170' r='50'/><rect x='150' y='100' width='100' height='50' rx='25'/></g><text x='200' y='130' font-family='Arial' font-size='18' fill='%23333' text-anchor='middle'>PERFUMES</text></svg>" alt="Tendencias en Perfumería 2025">
-                        <span class="blog-date">15 Ene 2025</span>
+                        <img src="../feromonas.jpg" alt="Perfumes para Hombres con Feromonas">
+                        <span class="blog-date">15 Abr 2025</span>
                     </div>
                     <div class="blog-content">
-                        <h3 class="blog-title">Las Tendencias en Perfumería para 2025</h3>
-                        <p class="blog-excerpt">Descubre las fragancias que marcarán tendencia este año. Desde notas florales hasta aromas orientales, te contamos todo sobre las nuevas preferencias en perfumería.</p>
+                        <h3 class="blog-title">Perfumes para Hombres con Feromonas: La Ciencia del Atractivo</h3>
+                        <p class="blog-excerpt">Descubre cómo los perfumes con feromonas pueden potenciar tu atractivo natural. Exploramos la ciencia detrás de estas fascinantes fragancias y cómo elegir la perfecta para ti. Una guía completa sobre el poder de seducción a través del olfato.</p>
+                        <div class="blog-meta">
+                            <div class="blog-author">
+                                <i class="fas fa-user"></i>
+                                <span>Andres</span>
+                            </div>
+                            <a href="../blogs/perfumes-para-hombres-con-feromonas" class="read-more">Leer más</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog posts ocultos -->
+                <article class="blog-card hidden">
+                    <div class="blog-image">
+                        <img src="../hombre.jpg" alt="Top 10 Perfumes para Hombres">
+                        <span class="blog-date">8 May 2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Top 10 Perfumes para Hombres que Debes Conocer en 2025</h3>
+                        <p class="blog-excerpt">Una selección exclusiva de las mejores fragancias masculinas del año. Desde clásicos atemporales hasta las últimas innovaciones en perfumería, te presentamos los aromas que están definiendo el estilo masculino moderno.</p>
                         <div class="blog-meta">
                             <div class="blog-author">
                                 <i class="fas fa-user"></i>
                                 <span>Equipo Perfuvalle</span>
                             </div>
-                            <a href="#" class="read-more">Leer más</a>
-                        </div>
-                    </div>
-                </article>
-                <!--
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23f0f8ff' width='400' height='250'/><g fill='%234CAF50' opacity='0.4'><polygon points='200,50 250,100 200,150 150,100'/><circle cx='120' cy='180' r='30'/><circle cx='280' cy='180' r='30'/></g><text x='200' y='210' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>CUIDADO PERSONAL</text></svg>" alt="Cuidado de la Piel">
-                        <span class="blog-date">10 Ene 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">Cómo Elegir el Perfume Perfecto para tu Tipo de Piel</h3>
-                        <p class="blog-excerpt">Tu tipo de piel influye en cómo se desarrolla una fragancia. Aprende a elegir el perfume ideal según tus características únicas para lograr la proyección perfecta.</p>
-                        <div class="blog-meta">
-                            <div class="blog-author">
-                                <i class="fas fa-user"></i>
-                                <span>María González</span>
-                            </div>
-                            <a href="#" class="read-more">Leer más</a>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23fff8dc' width='400' height='250'/><g fill='%238BC34A' opacity='0.5'><rect x='100' y='80' width='60' height='90' rx='30'/><rect x='240' y='80' width='60' height='90' rx='30'/><circle cx='200' cy='200' r='25'/></g><text x='200' y='230' font-family='Arial' font-size='14' fill='%23555' text-anchor='middle'>CONSEJOS</text></svg>" alt="Conservación de Perfumes">
-                        <span class="blog-date">5 Ene 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">5 Consejos para Conservar tus Perfumes por Más Tiempo</h3>
-                        <p class="blog-excerpt">Maximiza la vida útil de tus fragancias favoritas con estos consejos profesionales. Desde el almacenamiento hasta la aplicación correcta.</p>
-                        <div class="blog-meta">
-                            <div class="blog-author">
-                                <i class="fas fa-user"></i>
-                                <span>Carlos Rodríguez</span>
-                            </div>
-                            <a href="#" class="read-more">Leer más</a>
-                        </div>
-                    </div>
-                </article>
-                -->
-                <!-- Blog posts ocultos -->
-                <article class="blog-card hidden">
-                    <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23ffe4e1' width='400' height='250'/><g fill='%23ff6b6b' opacity='0.4'><heart cx='150' cy='120' r='30'/><heart cx='250' cy='120' r='30'/></g><text x='200' y='200' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>AMOR</text></svg>" alt="Perfumes para San Valentín">
-                        <span class="blog-date">1 Ene 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">Los Mejores Perfumes para Regalar en San Valentín</h3>
-                        <p class="blog-excerpt">Una guía completa para elegir la fragancia perfecta como regalo romántico. Desde clásicos atemporales hasta novedades irresistibles.</p>
-                        <div class="blog-meta">
-                            <div class="blog-author">
-                                <i class="fas fa-user"></i>
-                                <span>Ana Martínez</span>
-                            </div>
-                            <a href="#" class="read-more">Leer más</a>
+                            <a href="../blogs/perfumes-para-hombres-top-10" class="read-more">Leer más</a>
                         </div>
                     </div>
                 </article>
                 
                 <article class="blog-card hidden">
                     <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e6f3ff' width='400' height='250'/><g fill='%2300bcd4' opacity='0.6'><circle cx='120' cy='100' r='25'/><circle cx='200' cy='150' r='30'/><circle cx='280' cy='100' r='25'/></g><text x='200' y='210' font-family='Arial' font-size='18' fill='%23333' text-anchor='middle'>HISTORIA</text></svg>" alt="Historia del Perfume">
-                        <span class="blog-date">28 Dic 2024</span>
+                        <img src="../mujer.jpg" alt="Perfumes para Mujer con Feromonas">
+                        <span class="blog-date">10 Jun 2025</span>
                     </div>
                     <div class="blog-content">
-                        <h3 class="blog-title">La Fascinante Historia del Perfume a Través de los Siglos</h3>
-                        <p class="blog-excerpt">Un viaje por la historia de la perfumería, desde las civilizaciones antiguas hasta las innovaciones modernas que han revolucionado el mundo de las fragancias.</p>
+                        <h3 class="blog-title">Perfumes para Mujer con Feromonas: Elegancia y Seducción</h3>
+                        <p class="blog-excerpt">Explora el mundo de las fragancias femeninas enriquecidas con feromonas. Desde notas florales hasta aromas orientales, descubre cómo estas esencias especiales pueden realzar tu feminidad y crear una presencia magnética inolvidable.</p>
                         <div class="blog-meta">
                             <div class="blog-author">
                                 <i class="fas fa-user"></i>
-                                <span>Dr. Luis Perfetti</span>
+                                <span>Andres</span>
                             </div>
-                            <a href="#" class="read-more">Leer más</a>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card hidden">
-                    <div class="blog-image">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23f3e5f5' width='400' height='250'/><g fill='%239c27b0' opacity='0.5'><rect x='150' y='80' width='40' height='80' rx='20'/><rect x='210' y='80' width='40' height='80' rx='20'/><circle cx='200' cy='180' r='15'/></g><text x='200' y='220' font-family='Arial' font-size='16' fill='%23333' text-anchor='middle'>EMPRENDIMIENTO</text></svg>" alt="Negocio de Perfumes">
-                        <span class="blog-date">20 Dic 2024</span>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">Cómo Iniciar tu Propio Negocio de Perfumes</h3>
-                        <p class="blog-excerpt">Guía completa para emprendedores que desean incursionar en el mundo de la perfumería. Desde la inversión inicial hasta las estrategias de marketing.</p>
-                        <div class="blog-meta">
-                            <div class="blog-author">
-                                <i class="fas fa-user"></i>
-                                <span>Empresarios Perfuvalle</span>
-                            </div>
-                            <a href="#" class="read-more">Leer más</a>
+                            <a href="../blogs/perfumes-para-mujer-con-feromonas" class="read-more">Leer más</a>
                         </div>
                     </div>
                 </article>
