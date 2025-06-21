@@ -621,6 +621,18 @@ text-shadow: 3px 3px 12px rgba(0, 0, 0, 1);
             position: relative;
         }
 
+        .service-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.service-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
         .service-icon:after {
             content: '';
             position: absolute;
